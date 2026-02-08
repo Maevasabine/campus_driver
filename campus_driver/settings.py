@@ -86,15 +86,13 @@ WSGI_APPLICATION = "campus_driver.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "HOST": "postgres.railway.internal",
-        "PORT": "5432",
-        "NAME": "railway",
-        "USER": "postgres",
-        "PASSWORD": "UyNTuynBQdWZriNOrIWnKQcZHofXDJjE",
-    }
+    "default": dj_database_url.config(
+        default=os.environ.get("DATABASE_URL"),
+        conn_max_age=600,
+        ssl_require=True
+    )
 }
 
 
