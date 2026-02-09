@@ -1,6 +1,0 @@
-[build]
-builder = "heroku"
-
-[deploy]
-startCommand = "gunicorn campus_driver.wsgi"
-releaseCommand = "python manage.py migrate"
