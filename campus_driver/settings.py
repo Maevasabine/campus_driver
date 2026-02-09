@@ -88,9 +88,18 @@ WSGI_APPLICATION = "campus_driver.wsgi.application"
 
 
 DATABASES = {
-    "default": dj_database_url.config(conn_max_age=600)
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'railway',
+        'USER': 'root',
+        'PASSWORD': 'ggcgtnixonpIYcEeBMxjFXQDuUJCdGRE',
+        'HOST': 'mysql.railway.internal',
+        'PORT': '3306',
+        'OPTIONS': {
+            'sql_mode': 'STRICT_TRANS_TABLES',
+        }
+    }
 }
-
 
 
 # Password validation
