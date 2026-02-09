@@ -86,20 +86,13 @@ WSGI_APPLICATION = "campus_driver.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'railway',
-        'USER': 'root',
-        'PASSWORD': 'ggcgtnixonpIYcEeBMxjFXQDuUJCdGRE',
-        'HOST': 'mysql.railway.internal',
-        'PORT': '3306',
-        'OPTIONS': {
-            'sql_mode': 'STRICT_TRANS_TABLES',
-        }
-    }
+    "default": dj_database_url.parse(
+        os.environ.get("DATABASE_PUBLIC_URL"),
+        conn_max_age=600,
+    )
 }
+
 
 
 # Password validation
