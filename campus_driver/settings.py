@@ -93,10 +93,10 @@ DATABASES = {
         'NAME': 'railway',
         'USER': 'root',
         'PASSWORD': 'ggcgtnixonpIYcEeBMxjFXQDuUJCdGRE',
-        'HOST': 'mysql://root:ggcgtnixonpIYcEeBMxjFXQDuUJCdGRE@switchback.proxy.rlwy.net:25372/railway',
-        'PORT': '3306',
+        'HOST': 'switchback.proxy.rlwy.net',
+        'PORT': '25372',
         'OPTIONS': {
-            'sql_mode': 'STRICT_TRANS_TABLES',
+                   'ssl': {'ssl-mode': 'REQUIRED'},
         }
     }
 }
