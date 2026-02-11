@@ -3,7 +3,8 @@ from django.contrib.auth.hashers import check_password, make_password
 from django.core.mail import send_mail
 from django.db import IntegrityError
 from django.shortcuts import render, get_object_or_404
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, parser_classes
+from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 
 from .models import Cours, Enseignants, User, Section, Lecon
@@ -18,12 +19,14 @@ def liste_cours(request):
     return Response(serializer.data)
 
 @api_view(["POST"])
+@parser_classes([MultiPartParser, FormParser])
 def creer_cours(request):
     serializer = CoursSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
         return Response({"message": "cours créé avec succès !"}, status=201)
     return Response(serializer.errors, status=400)
+
 
 @api_view(["PUT", "PATCH"])
 def modifier_cours(request, cours_id):
