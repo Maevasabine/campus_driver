@@ -2,7 +2,7 @@ from django.conf import settings
 from django.contrib.auth.hashers import check_password, make_password
 from django.core.mail import send_mail
 from django.db import IntegrityError
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
@@ -129,8 +129,8 @@ def creer_section(request):
 ### Enseignants
 @api_view(["GET"])
 def liste_enseignant(request):
-    enseignant = Enseignants.objects.all()
-    serializer = EnseignantSerializer(enseignant, many=True)
+    enseignants = Enseignants.objects.all()
+    serializer = EnseignantSerializer(enseignants, many=True)
     return Response(serializer.data)
 
 @api_view(["POST"])
@@ -143,20 +143,16 @@ def creer_enseignant(request):
 
 @api_view(["PUT", "PATCH"])
 def modifier_enseignant(request, enseignant_id):
-    enseignant = Enseignants.objects.get(id=enseignant_id)
-    serializer = CoursSerializer(enseignant, data=request.data, partial=True)
-    print("Reçu :", request.data)
+    enseignant = get_object_or_404(Enseignants, id=enseignant_id)
+    serializer = EnseignantSerializer(enseignant, data=request.data, partial=True)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data)
-    if not serializer.is_valid():
-        print("Erreurs serializer :", serializer.errors)
-        return Response(serializer.errors, status=400)
     return Response(serializer.errors, status=400)
 
 @api_view(["DELETE"])
 def supprimer_enseignant(request, enseignant_id):
-    enseignant = Enseignants .objects.get(id=enseignant_id)
+    enseignant = get_object_or_404(Enseignants, id=enseignant_id)
     enseignant.delete()
     return Response({"message": "enseignant supprimé"}, status=204)
 
