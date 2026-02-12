@@ -15,17 +15,16 @@ class CoursSerializer(serializers.ModelSerializer):
 
 
 class LeconSerializer(serializers.ModelSerializer):
-    section_id=serializers.IntegerField(write_only=True)
     class Meta:
         model=Lecon
-        fields=['id','section_id','titre','video','is_preview','ordre']
+        fields=['id','section','titre','video','is_preview','ordre']
 
 class SectionSerializer(serializers.ModelSerializer):
     cours_nom=serializers.CharField(source='cours.nom', read_only=True)
     lecons = LeconSerializer(many=True, read_only=True)
     class Meta:
         model=Section
-        fields=['id','cours_nom','titre','ordre','lecons']
+        fields=['id','cours','cours_nom','titre','ordre','lecons']
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
