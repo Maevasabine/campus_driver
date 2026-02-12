@@ -11,7 +11,7 @@ class CoursSerializer(serializers.ModelSerializer):
     enseignant_nom = serializers.CharField(source='enseignant.nom', read_only=True)
     class Meta:
         model = Cours
-        fields = ['id', 'titre','montant','description', 'image', 'enseignant_nom']
+        fields = ['id', 'enseignant','titre','montant','description', 'image', 'enseignant_nom']
 
 
 class LeconSerializer(serializers.ModelSerializer):
