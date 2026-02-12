@@ -146,8 +146,18 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+ALLOWED_HOSTS = [
+    "campusdriver-production.up.railway.app",
+]
+
+
 CORS_ALLOWED_ORIGINS = [
     "https://campus-driverfrontend.vercel.app",
     "https://campusdriver-production.up.railway.app",
 ]
 CORS_ALLOW_CREDENTIALS = True
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://campusdriver-production.up.railway.app",
+]
